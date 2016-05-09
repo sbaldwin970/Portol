@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="App" lang="en">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title></title>
+		<!-- BOOTSTRAP -->
+    	 <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+    	<!-- LOGIN.CSS -->
+    	<link rel="stylesheet" href="/css/login.css">
+	</head>
+	<body ng-controller="mainController">
+		<div class="container-fluid">
+			<h3 class="logo">Portol</h3>
+			<div class="btn-group" role="group">
+				<button type="button" class="btn btn-default">Login</button>
+				<button type="button" class="btn btn-default">Sign up</button>
+			</div>
+		</div>
+		<div class="container">
+			<!-- LOGIN FORM -->
+			<h1 class="ls">Login</h1>
+			<form action="/auth/login" method="post">
+				<input class="username" type="email" name="username" placeholder="Email">
+				<input class="password" type="password" name="password" placeholder="Password">
+				<!--<input class="submit" type="submit">-->
+				<button type="submit" class="btn btn-default">submit</button>
+			</form>
+			<!-- SIGNUP FORM -->
+			<h1 class="ls">Signup</h1>
+			<form action="/auth/signup" method="post">
+				<input class="name" type="name" name="name" placeholder="Full Name">
+				<input class="username" type="email" name="username" placeholder="Email">
+				<input class="password" type="password" name="password" placeholder="Password">
+				<button type="submit" class="btn btn-default">submit</button>
+			</form>
+		</div>
+		<!-- ANGULAR -->
+		<script src="/node_modules/angular/angular.js"></script>
+		<!--UI BOOTSTRAP-->
+		<script src="https://cdn.jsdelivr.net/angular.bootstrap/1.2.2/ui-bootstrap.min.js"></script>
+		<!-- LOGIN.JS -->
+		<script src="/javascript/login.js"></script>
+	</body>
+</html>

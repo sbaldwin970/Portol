@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="App">
+	<head>
+		<title></title>
+		<!-- BOOTSTRAP -->
+    	<link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+    	<!-- HOME.CSS -->
+    	<link rel="stylesheet" href="/css/home.css">
+	</head>
+	<body ng-controller="mainController">
+		<div class="container">
+			<a href="/html/edit-profile.html"><h5>Edit Profile</h5></a>
+			<h1>Hey there, {{user.name}}</h1>
+			<h5>{{user.bio}}</h5>
+			<img class="profile-pic" ng-src="{{user.image}}">
+
+
+			<div class="row">
+				<textarea ng-model="newPost" class="form-control" ng-keypress="sendPost($event)" placeholder="Post.."></textarea>
+			</div>
+			<div class="row">
+				<table class="post-section">
+
+				<tr><a ng-if="incomingPosts.length > 0" ng-click="setNewPosts()">there are {{difference}} new posts</a></tr>
+
+					<tr ng-repeat="post in posts">
+						<td>
+							<h6>{{post.user}}</h6>
+							<img class="post-pic" ng-src="{{post.userImage}}">
+						</td>
+						<td>
+							<h6>{{post.date | date: 'MM/dd/yyyy hh:mm'}}</h6>
+							<h6>{{post.content}}</h6>
+						</td>
+						
+					</tr>
+				</table>
+			</div>
+
+
+		</div>
+		<!-- ANGULAR -->
+		<script src="/node_modules/angular/angular.js"></script>
+		<!-- MAIN.JS -->
+		<script src="/javascript/main.js" type="text/javascript"></script>
+		<!-- LIBRARIES -->
+		<script src="/node_modules/ng-file-upload/dist/ng-file-upload.js"></script>
+		<script src="/node_modules/ng-file-upload/dist/ng-file-upload-all.js"></script>
+		<script src="/node_modules/ng-file-upload/dist/ng-file-upload-shim.js"></script>
+	</body>
+</html>

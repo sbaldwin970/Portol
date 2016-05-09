@@ -1,0 +1,19 @@
+body {
+}
+.container-fluid {
+}
+.btn-group {
+	margin-top: 15px;
+	float: right;
+}
+.logo {
+	display: inline-block;
+}
+.ls {
+	color: white;
+}
+.btn {
+
+	width: 100px;
+	border: 1px solid green;
+}
