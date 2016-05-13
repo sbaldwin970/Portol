@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="App">
+	<head>
+		<title></title>
+		<!-- BOOTSTRAP -->
+    	<link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+    	<!-- HOME.CSS -->
+    	<link rel="stylesheet" href="/css/home.css">
+	</head>
+	<body ng-controller="mainController">
+		<div class="container">
+			<h1>{{user.username}}</h1>
+			<ul>
+				<li ng-repeat="poster in users" ng-show="user._id !== poster._id">
+					{{poster.name}}
+					<a ng-click="follow(user._id, poster._id)" ng-hide="checkIsFollowing(poster._id)">follow</a>
+					<a ng-click="unfollow(user._id, poster._id)" ng-show="checkIsFollowing(poster._id)">unfollow</a>
+				</li>
+			</ul>
+			
+
+
+		</div>
+		<!-- ANGULAR -->
+		<script src="/node_modules/angular/angular.js"></script>
+		<!-- MAIN.JS -->
+		<script src="/javascript/main.js" type="text/javascript"></script>
+		<!-- LIBRARIES -->
+		<script src="/node_modules/ng-file-upload/dist/ng-file-upload.js"></script>
+		<script src="/node_modules/ng-file-upload/dist/ng-file-upload-all.js"></script>
+		<script src="/node_modules/ng-file-upload/dist/ng-file-upload-shim.js"></script>
+	</body>
+</html>

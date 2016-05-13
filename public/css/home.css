@@ -1,11 +1,13 @@
 .profile-pic {
 	height: 100px;
 	width: 100px;
+	border-radius: 10px;
 }
 .post-pic {
 	height: 50px;
 	width: 50px;
+	border-radius: 10px;
 }
-.post-section {
-	
+.bio {
+	margin-bottom: 70px;
 }

@@ -50,6 +50,8 @@ app.post('/api/profile/editPhoto', multipartMiddleware, apiController.updatePhot
 app.post('/api/profile/updateBio', apiController.updateBio);
 app.post('/api/post/posts', apiController.postPosts);
 app.get('/api/post/get', apiController.getPosts);
+app.get('/api/users/get', apiController.getUsers);
+app.post('/api/users/follow', apiController.followUser);
 
 // SERVER \\
 var port = 3000

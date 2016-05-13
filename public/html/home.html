@@ -10,9 +10,12 @@
 	<body ng-controller="mainController">
 		<div class="container">
 			<a href="/html/edit-profile.html"><h5>Edit Profile</h5></a>
-			<h1>Hey there, {{user.name}}</h1>
-			<h5>{{user.bio}}</h5>
+			<a href="/html/login.html"><h5>Logout</h5></a>
+			<a href="/html/follow.html"><h5>follow</h5></a>
+			<h1>{{user.name}}</h1>
 			<img class="profile-pic" ng-src="{{user.image}}">
+			<h5 class="bio">{{user.bio}}</h5>
+			
 
 
 			<div class="row">

@@ -11,22 +11,6 @@ var mainController = function($scope, $http, $interval, Upload) {
 	}, function() {
 		$scope.upload($scope.file);
 	});
-
-	//$scope.upload = function(file) {
-	//	if(file) {
-	//		Upload.upload({
-	//			url: '/api/profile/editPhoto', 
-	//			method: 'POST', 
-	//			data: {userId: $scope.user._id},
-	//			file: file
-	//		}).progress(function(evt) {
-	//			console.log("firing");
-	//		}).success(function(data) {
-	//		}).error(function(error) {
-	//			console.error(error);
-	//		});
-	//	};
-	//};
 	$scope.upload = function(file) {
 		if(file) {
 			file.upload = Upload.upload({
@@ -67,8 +51,15 @@ var mainController = function($scope, $http, $interval, Upload) {
 			});
 		};
 	};
+
+
 	function getPosts(initial) {
-		$http.get('/api/post/get').success(function(response) {
+		var data = {};
+		if($scope.user) {
+			data.following = angular.copy($scope.user.following);
+			data.following.push({userId: $scope.user._id})
+		}
+		$http.get('/api/post/get', data).success(function(response) {
 			if(initial) {
 				$scope.posts = response;
 			}
@@ -79,6 +70,8 @@ var mainController = function($scope, $http, $interval, Upload) {
 			};
 		});
 	};
+
+
 	$interval(function() {
 		getPosts(false);
 		if($scope.incomingPosts) {
@@ -91,7 +84,28 @@ var mainController = function($scope, $http, $interval, Upload) {
 		$scope.posts = angular.copy($scope.incomingPosts);
 		$scope.incomingPosts = undefined;
 	};
-getPosts(true);
+	getPosts(true);
+
+
+	$http.get('/api/users/get').then(function(response) {
+		$scope.users = response.data;
+		console.log($scope.users)
+	})
+	$scope.follow = function(userId, posterId) {
+		request = {userId: userId, posterId: posterId};
+		$http.post('/api/users/follow', request).then(function(){
+			console.log("following", posterId);
+		})
+	}
+	$scope.checkIsFollowing = function(posterId) {
+		for(var i = 0, len = $scope.user.following.length; i < len; i++){
+			if($scope.user.following[i].userId === posterId) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	
 };
 angular.module('App')

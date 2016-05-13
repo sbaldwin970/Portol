@@ -71,6 +71,7 @@ module.exports.postPosts = function(req, res) {
 	})
 };
 module.exports.getPosts = function(req, res) {
+	if(!req.body.following) {
 	Post.find({})
 		.sort({date: -1})
 		.exec(function(err, allPosts) {
@@ -81,7 +82,48 @@ module.exports.getPosts = function(req, res) {
 				res.json(allPosts);
 			}
 		})
+	}
+	else {
+		var requestedPosts = [];
+		for(var i = 0, len = req.body.following.length; i < len; i++) {
+			requestedPosts.push({userId: req.body.following[i].userId});
+		}
+		Post.find({$or: requestedPosts})
+			.sort({date: -1})
+			.exec(function(err, allPosts) {
+				if(err) {
+					res.error(err);
+				}
+				else {
+					res.json(allPosts);
+				}
+			})
+	};
 }
+var Users = require('../models/user')
+module.exports.getUsers = function(req, res) {
+	Users.find({}, function(err, usersData) {
+		if(err) {
+			res.error(err);
+		}
+		else {
+			res.json(usersData);
+		}
+	})
+}
+module.exports.followUser = function(req, res) {
+	var userId = req.body.userId,
+		posterId = req.body.posterId;
+	Users.findById(posterId, function(err, poster) {
+		poster.followers.push({userId: userId});
+		poster.save();
+	})
+	Users.findById(userId, function(err, follower) {
+		follower.following.push({userId: posterId});
+		follower.save();
+	})
+}
+
 
 
 
